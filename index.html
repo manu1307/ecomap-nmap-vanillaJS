@@ -7,28 +7,32 @@
 			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
 		/>
 		<title>간단한 지도 표시하기</title>
-		<!-- <script
+		<script
 			type="text/javascript"
 			src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=rykhlkvz4r"
-		></script> -->
+		></script>
 	</head>
 	<body>
 		<div id="map" style="width: 100%; height: 400px"></div>
-		<div>Hello Naver</div>
+		<div>위치</div>
+		<script>
+			window.addEventListener("onLoad", () => {
+				getLocation();
+			});
+			const getLocation = () => {
+				navigator.geolocation.getCurrentPosition(onSuccess);
+			};
 
-		<script
-			type="text/javascript"
-			src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=rykhlkvz4r&callback=initMap"
-		></script>
-		<script type="text/javascript">
-			var map = null;
+			const onSuccess = (position) => {
+				const { latitude, longitude } = position.coords;
+				console.log(latitude, "and", longitude);
+			};
 
-			function initMap() {
-				map = new naver.maps.Map("map", {
-					center: new naver.maps.LatLng(37.3595704, 127.105399),
-					zoom: 10,
-				});
-			}
+			// var mapOptions = {
+			// 	center: new naver.maps.LatLng(37.3595704, 127.105399),
+			// 	zoom: 2,
+			// };
+			// var map = new naver.maps.Map("map", mapOptions);
 		</script>
 	</body>
 </html>
