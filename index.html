@@ -15,17 +15,10 @@
 	<body>
 		<div id="map" style="width: 100%; height: 100%"></div>
 		<script>
-			var mapOptions = {
-				center: new naver.maps.LatLng(37.3595704, 127.105399),
-				zoom: 15,
+			const currentCoordinates = {
+				longitude: 0,
+				latitude: 0,
 			};
-
-			var marker = new naver.maps.Marker({
-				position: new naver.maps.LatLng(37.3595704, 127.105399),
-				map: map,
-			});
-
-			var map = new naver.maps.Map("map", mapOptions);
 
 			const options = {
 				enableHighAccuracy: true,
@@ -35,10 +28,13 @@
 
 			function success(pos) {
 				const crd = pos.coords;
+				currentCoordinates.longitude = crd.longitude;
+				currentCoordinates.latitude = crd.latitude;
 
-				console.log("Your current position is:");
-				console.log(`Latitude : ${crd.latitude}`);
-				console.log(`Longitude: ${crd.longitude}`);
+				console.log(typeof currentCoordinates.latitude);
+
+				console.log(`Latitude : ${currentCoordinates.longitude}`);
+				console.log(`Longitude: ${currentCoordinates.latitude}`);
 				console.log(`More or less ${crd.accuracy} meters.`);
 			}
 
@@ -47,6 +43,48 @@
 			}
 
 			navigator.geolocation.getCurrentPosition(success, error, options);
+
+			setTimeout(() => {
+				const locations = [
+					{ place: "건대입구역", lat: 37.539922, lng: 127.070609 },
+					{ place: "어린이대공원역", lat: 37.547263, lng: 127.074181 },
+				];
+
+				locations.push({
+					place: "현재 위치",
+					lat: currentCoordinates.latitude,
+					lng: currentCoordinates.longitude,
+				});
+
+				let mapOptions = {
+					center: new naver.maps.LatLng(
+						currentCoordinates.latitude,
+						currentCoordinates.longitude
+					),
+					zoom: 15,
+				};
+				let map = new naver.maps.Map("map", mapOptions);
+
+				for (let i = 0; i < locations.length; i++) {
+					if (locations[i].place === "현재 위치") {
+						let marker = new naver.maps.Marker({
+							position: new naver.maps.LatLng(
+								locations[i].lat,
+								locations[i].lng
+							),
+							map: map,
+							options: {
+								clickable: false,
+								visible: false,
+							},
+						});
+					}
+					let marker = new naver.maps.Marker({
+						position: new naver.maps.LatLng(locations[i].lat, locations[i].lng),
+						map: map,
+					});
+				}
+			}, 100);
 		</script>
 	</body>
 </html>
