@@ -13,26 +13,32 @@
 		></script>
 	</head>
 	<body>
-		<div id="map" style="width: 100%; height: 400px"></div>
+		<div id="map" style="width: 100%; height: 100%"></div>
 		<div>위치</div>
 		<script>
-			window.addEventListener("onLoad", () => {
-				getLocation();
-			});
-			const getLocation = () => {
-				navigator.geolocation.getCurrentPosition(onSuccess);
-			};
-
-			const onSuccess = (position) => {
-				const { latitude, longitude } = position.coords;
-				console.log(latitude, "and", longitude);
-			};
-
-			// var mapOptions = {
-			// 	center: new naver.maps.LatLng(37.3595704, 127.105399),
-			// 	zoom: 2,
+			// window.addEventListener("onLoad", () => {
+			// 	getLocation();
+			// });
+			// const getLocation = () => {
+			// 	navigator.geolocation.getCurrentPosition(onSuccess);
 			// };
-			// var map = new naver.maps.Map("map", mapOptions);
+
+			// const onSuccess = (position) => {
+			// 	const { latitude, longitude } = position.coords;
+			// 	console.log(latitude, "and", longitude);
+			// };
+
+			var mapOptions = {
+				center: new naver.maps.LatLng(37.3595704, 127.105399),
+				zoom: 15,
+			};
+
+			var marker = new naver.maps.Marker({
+				position: new naver.maps.LatLng(37.3595704, 127.105399),
+				map: map,
+			});
+
+			var map = new naver.maps.Map("map", mapOptions);
 		</script>
 	</body>
 </html>
