@@ -15,6 +15,19 @@
 	<body>
 		<div id="map" style="width: 100%; height: 100%"></div>
 		<script>
+			const fetchStoreData = async () => {
+				const response = await fetch(
+					"http://43.200.176.153:8080/api/store/map?latitude=37.5573934061322&longitude=127.079911629838&distance=300",
+					{
+						mode: "cors",
+					}
+				);
+				const data = await response.json();
+				console.log(data);
+			};
+			fetchStoreData();
+
+			var HOME_PATH = window.HOME_PATH || ".";
 			const currentCoordinates = {
 				longitude: 0,
 				latitude: 0,
@@ -73,18 +86,27 @@
 								locations[i].lng
 							),
 							map: map,
-							options: {
-								clickable: false,
-								visible: false,
+							// icon: "/img/rec.png",
+							icon: {
+								url: HOME_PATH + "/img/rec.png", //50, 68 크기의 원본 이미지
+								size: new naver.maps.Size(25, 25),
+								scaledSize: new naver.maps.Size(25, 25),
+								origin: new naver.maps.Point(0, 0),
+								anchor: new naver.maps.Point(12, 34),
 							},
+							title: "현재 위치",
+						});
+					} else {
+						let marker = new naver.maps.Marker({
+							position: new naver.maps.LatLng(
+								locations[i].lat,
+								locations[i].lng
+							),
+							map: map,
 						});
 					}
-					let marker = new naver.maps.Marker({
-						position: new naver.maps.LatLng(locations[i].lat, locations[i].lng),
-						map: map,
-					});
 				}
-			}, 100);
+			}, 10);
 		</script>
 	</body>
 </html>
