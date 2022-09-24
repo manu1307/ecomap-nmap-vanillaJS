@@ -27,7 +27,8 @@
 			// };
 			// fetchStoreData();
 
-			var HOME_PATH = window.HOME_PATH || ".";
+			// var HOME_PATH = window.HOME_PATH || ".";
+
 			const currentCoordinates = {
 				longitude: 0,
 				latitude: 0,
@@ -57,12 +58,12 @@
 
 			navigator.geolocation.getCurrentPosition(success, error, options);
 
-			setTimeout(() => {
-				const locations = [
-					{ place: "건대입구역", lat: 37.539922, lng: 127.070609 },
-					{ place: "어린이대공원역", lat: 37.547263, lng: 127.074181 },
-				];
+			const locations = [
+				{ place: "건대입구역", lat: 37.539922, lng: 127.070609 },
+				{ place: "어린이대공원역", lat: 37.547263, lng: 127.074181 },
+			];
 
+			setTimeout(() => {
 				locations.push({
 					place: "현재 위치",
 					lat: currentCoordinates.latitude,
@@ -88,7 +89,7 @@
 							map: map,
 							// icon: "/img/rec.png",
 							icon: {
-								url: HOME_PATH + "/img/rec.png", //50, 68 크기의 원본 이미지
+								url: "/img/rec.png", //50, 68 크기의 원본 이미지
 								size: new naver.maps.Size(25, 25),
 								scaledSize: new naver.maps.Size(25, 25),
 								origin: new naver.maps.Point(0, 0),
@@ -106,7 +107,7 @@
 						});
 					}
 				}
-			}, 10);
+			}, 100);
 		</script>
 	</body>
 </html>
