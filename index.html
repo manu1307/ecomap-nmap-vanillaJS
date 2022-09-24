@@ -15,17 +15,17 @@
 	<body>
 		<div id="map" style="width: 100%; height: 100%"></div>
 		<script>
-			const fetchStoreData = async () => {
-				const response = await fetch(
-					"http://43.200.176.153:8080/api/store/map?latitude=37.5573934061322&longitude=127.079911629838&distance=300",
-					{
-						mode: "cors",
-					}
-				);
-				const data = await response.json();
-				console.log(data);
-			};
-			fetchStoreData();
+			// const fetchStoreData = async () => {
+			// 	const response = await fetch(
+			// 		"http://43.200.176.153:8080/api/store/map?latitude=37.5573934061322&longitude=127.079911629838&distance=300",
+			// 		{
+			// 			mode: "cors",
+			// 		}
+			// 	);
+			// 	const data = await response.json();
+			// 	console.log(data);
+			// };
+			// fetchStoreData();
 
 			var HOME_PATH = window.HOME_PATH || ".";
 			const currentCoordinates = {
